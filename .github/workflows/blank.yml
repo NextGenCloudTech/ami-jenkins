@@ -1,0 +1,22 @@
+name: build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Packer
+        uses: hashicorp/setup-packer@v1
+        with:
+          version: latest
+
+      - name: Run Packer Validate
+        run: packer validate .
